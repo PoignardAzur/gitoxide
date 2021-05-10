@@ -16,7 +16,7 @@
 * [ ] Pack decoding takes [5x more memory][android-base-discussion] than git on the [android-base repository][android-base-repo].
 * [ ] On **ARM64 on MacOS** the SHA1 implementation of the [`sha-1` crate](https://github.com/RustCrypto/hashes) is capped at about 550MB/s, half the speed of what I saw on Intel and about 50% slower than what's implemented in `libcorecrypto.dylib`. Get that fast and the decoding stage will be able
       to beat git on fewer cores. [See this comment for more](https://github.com/Byron/gitoxide/discussions/46#discussioncomment-511268). Right now we only do when scaling beyond what `git` can do due to lock contention.
-      * This should work once the `asm` feature can be enabled in the `sha-1` crate, which currently fails but is tracked [in this issue](https://github.com/RustCrypto/asm-hashes/issues/28).
+    * This should work once the `asm` feature can be enabled in the `sha-1` crate, which currently fails but is tracked [in this issue](https://github.com/RustCrypto/asm-hashes/issues/28).
         * If it's not fast enough, one might hope that ARM8 instructions can improve performance, but right now they [aren't available](https://github.com/rust-lang/stdarch/issues/1055#issuecomment-803737796).
         * Maybe the path forward for that crate is to [use system or openssl dylibs](https://github.com/RustCrypto/asm-hashes/issues/5).
 * [ ] ~~`pack::cache::lru::Memory` all copy input data in individual allocations. Could a pre-allocated arena or slab be faster?~~
